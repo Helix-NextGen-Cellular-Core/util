@@ -33,7 +33,7 @@ func SetMongoDB(setdbName string, url string) (*MongoClient, error) {
 	c := MongoClient{dbName: setdbName, url: url}
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(url))
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(url).SetMinPoolSize(1).SetMaxPoolSize(10))
 	if err != nil {
 		return nil, fmt.Errorf("SetMongoDB err: %+v", err)
 	}
