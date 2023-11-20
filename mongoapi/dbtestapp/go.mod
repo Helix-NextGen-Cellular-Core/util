@@ -2,7 +2,7 @@ module testapp
 
 go 1.18
 
-replace github.com/omec-project/util/mongoapi => ../../
+replace github.com/omec-project/util => ../util
 
 require (
 	github.com/gin-contrib/cors v1.4.0
