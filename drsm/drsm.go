@@ -96,7 +96,11 @@ func (d *Drsm) ConstuctDrsm(opt *Options) {
 	//connect to DB
 	d.mongo, _ = MongoDBLibrary.SetMongoDB(d.db.Name, d.db.Url)
 	logger.AppLog.Debugln("SetMongoDB done ", d.db.Name)
+	_, err := d.mongo.CreateIndex(d.sharedPoolName, "_id")
 
+	if err != nil {
+		logger.AppLog.Infof("Failed to create id index: %v", err)
+	}
 	go d.handleDbUpdates()
 	go d.punchLiveness()
 	go d.podDownDetected()
