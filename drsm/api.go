@@ -49,13 +49,18 @@ type DrsmInterface interface {
 	DeletePod(string)
 }
 
-func InitDRSM(sharedPoolName string, myid PodId, db DbInfo, opt *Options) (DrsmInterface, error) {
+func InitDRSM(sharedPoolName string, myid PodId, db DbInfo, opt *Options, punchLivenessTime int) (DrsmInterface, error) {
 	logger.AppLog.Debugln("CLIENT ID: ", myid)
 
 	d := &Drsm{sharedPoolName: sharedPoolName,
 		clientId: myid,
 		db:       db,
 		mode:     ResourceClient}
+	if punchLivenessTime == 0 {
+		d.punchLivenessTime = 5000
+	} else {
+		d.punchLivenessTime = punchLivenessTime
+	}
 
 	d.ConstuctDrsm(opt)
 
