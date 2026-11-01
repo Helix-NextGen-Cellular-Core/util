@@ -96,7 +96,7 @@ func (d *Drsm) ReleaseInt32ID(id int32) error {
 	chunk, found := d.localChunkTbl[chunkId]
 	if found == true {
 		chunk.ReleaseIntID(id)
-		logger.AppLog.Debugln("ID Released: ", id)
+		// logger.AppLog.Debugln("ID Released: ", id)
 		return nil
 	} else {
 		chunk, found := d.scanChunks[chunkId]
