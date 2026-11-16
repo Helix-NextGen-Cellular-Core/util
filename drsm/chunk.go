@@ -82,7 +82,6 @@ func (c *chunk) ReleaseIntID(id int32) {
 	i = id & 0x3ff
 	for _, freeid := range c.FreeIds {
 		if freeid == i {
-			// log.Printf("ID %v is already freed", freeid)
 			return
 		}
 	}
